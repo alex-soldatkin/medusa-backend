@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: medusa-postgres
+    environment:
+      POSTGRES_DB: medusa-VsLd
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: supersecret_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    container_name: medusa-backend
+    environment:
+      DATABASE_URL: postgres://postgres:supersecret_password@postgres:5432/medusa-VsLd
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: something
+      COOKIE_SECRET: something
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    working_dir: /app
+    command: sh -c "yarn cache clean && yarn install && yarn run medusa migrations run && yarn start"
+    ports:
+      - "9000:9000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9000/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  redis:
+    image: redis:6
+    container_name: medusa-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
