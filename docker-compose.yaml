@@ -26,7 +26,7 @@ services:
       - redis
     volumes:
       - ./backend:/app
-      - /app/node_modules
+      - ./app/node_modules
     working_dir: /app
     command: sh -c "yarn cache clean && yarn install && yarn run medusa migrations run && yarn start"
     ports:
