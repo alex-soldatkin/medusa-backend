@@ -17,8 +17,8 @@ services:
     build: ./backend
     container_name: medusa-backend
     environment:
-      DATABASE_URL: postgres://postgres:supersecret_password@postgres:5432/medusa-VsLd
-      REDIS_URL: redis://redis:6379
+      DATABASE_URL: "postgres://postgres:supersecret_password@postgres:5432/medusa-VsLd"
+      REDIS_URL: "redis://redis:6379"
       JWT_SECRET: something
       COOKIE_SECRET: something
     depends_on:
