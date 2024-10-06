@@ -24,6 +24,7 @@
     "start:custom": "cross-env npm run build && node --preserve-symlinks --trace-warnings index.js",
     "dev": "cross-env npm run build:server && medusa develop"
   },
+  "start": "npm run build && medusa migrations run && medusa start",
   "dependencies": {
     "@medusajs/admin": "^7.1.16",
     "@medusajs/cache-inmemory": "1.8.11",
