@@ -3,7 +3,7 @@ FROM node:14
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN RUN apt-get --assume-yes install yarn && apt-mark hold yarn 
 
 COPY . .
 
