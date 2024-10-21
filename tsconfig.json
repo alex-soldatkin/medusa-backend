@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es2019",
+    "target": "ES2015",
     "allowJs": true,
     "esModuleInterop": true,
+    "types": ["ioredis-mock", "multer", "jest"],
     "module": "commonjs",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
@@ -19,7 +20,7 @@
     "resolveJsonModule": true,
     "checkJs": false
   },
-  "include": ["src/"],
+  "include": ["src/", "src/admin/"],
   "exclude": [
     "**/__tests__",
     "**/__fixtures__",
